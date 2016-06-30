@@ -1,0 +1,21 @@
+{
+  "name": "kafka-comsumer",
+  "version": "1.0.0",
+  "description": "Kafka Comsumer",
+  "main": "index.js",
+  "dependencies": {
+    "promise": "*",
+    "kafka-node": "*"
+    "kafka-rest": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kafka"
+  ],
+  "author": "yurifrl@outlook.com",
+  "license": "ISC"
+}
