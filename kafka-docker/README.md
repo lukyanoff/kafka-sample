@@ -78,7 +78,4 @@ Reference: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metad
 
 # Yuri
 Docker Host IP
-/sbin/ip route|awk '/default/ { print $3 }'
-$KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper $ZK --replication-factor 1 --partitions 1 --topic fast-messages
-$KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper $ZK --replication-factor 1 --partitions 1 --topic summary-markers
-$KAFKA_HOME/bin/kafka-topics.sh --list --zookeeper $ZK
+

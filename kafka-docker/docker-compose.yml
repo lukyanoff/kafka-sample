@@ -7,8 +7,8 @@ services:
     links:
       - zookeeper
       - kafka
-    environment:
-      ZK_HOSTS: 172.17.0.1:2181
+    env_file:
+        - ./secrets/development.env
   manager:
     image: sheepkiller/kafka-manager
     ports:
@@ -16,20 +16,26 @@ services:
     links:
       - zookeeper
       - kafka
+    env_file:
+        - ./secrets/development.env
     environment:
-      ZK_HOSTS: 172.17.0.1:2181
       APPLICATION_SECRET: letmein
-  zookeeper:
-    image: wurstmeister/zookeeper
-    ports:
-      - "2181:2181"
   kafka:
     build: .
+    links:
+      - zookeeper
     ports:
       - "9092"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 192.168.0.1
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+        - ./secrets/development.env
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+

@@ -6,7 +6,6 @@
   "dependencies": {
     "promise": "*",
     "kafka-node": "*"
-    "kafka-rest": "*"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,18 +1,23 @@
 console.log("=================== PRODUCER ===================")
 
-// const URL = "172.17.0.1:2181"
 const URL = "127.0.0.1:2181"
-// const topic = "topic"
 
-const KafkaRest = require('kafka-rest')
-const kafka = new KafkaRest({ 'url': URL })
+const kafka = require('kafka-node')
+const Producer = kafka.Producer
+const KeyedMessage = kafka.KeyedMessage
+const client = new kafka.Client()
+const producer = new Producer(client)
+const km = new KeyedMessage('key', 'message')
 
-kafka.brokers.list((err, brokers) => {
-  console.log('broker err -> ', err)
-  console.log('broker err -> ', brokers)
+const payloads = [
+  { topic: 'topic', messages: 'hi', partition: 0 },
+  { topic: 'topic', messages: ['hello', 'world', km] }
+]
+
+producer.on('ready', () => {
+  producer.send(payloads, (err, data) => {
+    console.log(data)
+  })
 })
 
-// kafka.topics.list((err, topics) => {
-//   console.log('topics err -> ', err)
-//   console.log('topics err -> ', topics)
-// })
+producer.on('error', err => console.log(err))
